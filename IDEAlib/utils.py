@@ -20,35 +20,35 @@ def dict2df(dict_, key_col='token', val_col='value'):
     return df
 
 
-## multiprocessing
-def pD_apply_df(args):
-    df, func, pattern_dict, label_list, pattern_templates, label_col = args
-    return df.apply(lambda x: func(x, pattern_dict, label_list, pattern_templates, label_col), axis=1)
-
-def patternDict_multiprocessing(df, func, pattern_dict, label_list, pattern_templates, label_col, **kwargs):
-    workers = kwargs.pop('workers')
-    pool = multiprocessing.Pool(processes=workers)
-    pool.map(pD_apply_df, [(d, func, pattern_dict, label_list, pattern_templates, label_col) for d in np.array_split(df, workers)])
-    pool.close()
-    # return pd.concat(list(result))
-
-
+## multiprocessing (could be more pretty QQ)
 def _apply_df(args):
     df, func, kwargs = args
+    if 'axis' in kwargs:
+        axis = kwargs.pop('axis')
+        return df.apply(func, **kwargs, axis=axis)
     return df.apply(func, **kwargs)
 
 def apply_by_multiprocessing(df, func, **kwargs):
     workers = kwargs.pop('workers')
     if workers == -1:
         workers = multiprocessing.cpu_count() 
+    coln = 1    
+    if 'coln' in kwargs:
+        coln = kwargs.pop('coln')
     pool = multiprocessing.Pool(processes=workers)
     result = pool.map(_apply_df, [(d, func, kwargs) for d in np.array_split(df, workers)])
     pool.close()
-    return pd.concat(list(result))
+    series = pd.concat(list(result))
 
-
-
-
+    ## TODO: make here beautiful
+    if coln == 1:
+        return series
+    elif coln == 2:
+        series_0, series_1 = series.apply(lambda x: x[0]), series.apply(lambda x: x[1])
+        return series_0, series_1
+    elif coln == 3:
+        series_0, series_1, series_2 = series.apply(lambda x: x[0]), series.apply(lambda x: x[1]), series.apply(lambda x: x[2])
+        return series_0, series_1, series_2    
 
 
 

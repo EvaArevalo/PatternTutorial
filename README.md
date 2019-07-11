@@ -1,18 +1,22 @@
 # PatternTutorial
-A Graph-based Pattern Representations Tutorial
+A Graph-based Pattern Representations with tutorial
 
-#### Easy Reading: [nbviewer](https://nbviewer.jupyter.org/github/IDEA-NTHU-Taiwan/PatternTutorial/blob/master/Graph-based%20Pattern%20Representations%20Tutorial.ipynb)
+#### Easy Reading Tutorial: [nbviewer](https://nbviewer.jupyter.org/github/IDEA-NTHU-Taiwan/PatternTutorial/blob/master/Graph-based%20Pattern%20Representations%20Tutorial.ipynb)
 
-#### Slides: [Google Slides](https://docs.google.com/presentation/d/1COyF_gAl3h3vl8RM-moZIfqDywsuZX1hFEBjWKiGsBQ)
+#### Tutorial Slides: [Google Slides](https://docs.google.com/presentation/d/1COyF_gAl3h3vl8RM-moZIfqDywsuZX1hFEBjWKiGsBQ)
 
 #### GitHub Repo: [IDEA-NTHU-Taiwan/PatternTutorial](https://github.com/IDEA-NTHU-Taiwan/PatternTutorial)
 
 #### Example Dataset: [SemEval 2017 Task](https://competitions.codalab.org/competitions/16380)
 
-#### Author: [Ray](https://github.com/thisray), [Evan](https://github.com/EvanYu800112)
-
 #### Libraries requirements
 `matplotlib`, `networkx`, `nltk`, `numpy`, `pandas`, `IDEAlib` (in this repo)
+
+#### Developping
+for developer
+```
+PatternTutorial$ pip3 install --user --editable .
+```
 
 #### References
 
@@ -30,12 +34,9 @@ Saravia Elvis, Hsien-Chi Toby Liu, Yen-Hao Huang, Junlin Wu, and Yi-Shin Chen. "
 
 #### TODO
 
-1. some column names are hard-code now (in `patternDict_()`)
 2. graph minus
-3. the multi-process lock problem in `patternDict()`
-4. the hard-code args in multi-process
-5. the rule of `both`
-6. patternize function
-7. make `token2cwsw()` prettier
-8. 
+8. Unit testing 
+10. diversty & label (`tfief` part)
+11. integrate the type of pattern (now we have `list`, `tuple`, `str` XD)
+12. speedup cc (graph things)
 
